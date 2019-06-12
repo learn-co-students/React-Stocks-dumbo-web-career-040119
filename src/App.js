@@ -8,7 +8,13 @@ class App extends Component {
     stocks: [],
     portfolio: [],
     filterTerm: ""
-    }
+  }
+
+  setFilter = (filterTerm) => {
+    this.setState({
+      filterTerm: filterTerm
+    })
+  }
 
   sort = (sortTerm) => {
     let sortedStocks;
@@ -27,11 +33,6 @@ class App extends Component {
     })
   }
 
-  setFilter = (filterTerm) => {
-    this.setState({
-      filterTerm: filterTerm
-    })
-  }
 
   filter = () => {
     switch(this.state.filterTerm) {
@@ -45,6 +46,14 @@ class App extends Component {
 
       case "Finance":
       return this.state.stocks.filter(stock => stock.type === "Finance")
+      break;
+
+      case "Alphabetically":
+      return this.state.stocks.sort((a,b) => (a.name > b.name ? 1 : -1))
+      break;
+
+      case "Price":
+       return this.state.stocks.sort((a,b) => (a.price > b.price ? -1 : 1))
       break;
 
       default:
